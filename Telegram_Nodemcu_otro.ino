@@ -1,25 +1,9 @@
-/*
-char ssid[] = "";     // el nombre de tu Red
-char password[] = ""; // la clave de tu Red
-
-// Initialize Telegram BOT
-#define BOTtoken ""  // el token de tu BOT, lo obtenemos de BotFather
-/*
-Name:        lightBot.ino
-Created:     17/01/2018
-Author:      Stefano Ledda <shurillu@tiscalinet.it>
-Description: a simple example that do:
-             1) parse incoming messages
-             2) if "LIGHT ON" message is received, turn on the onboard LED
-             3) if "LIGHT OFF" message is received, turn off the onboard LED
-             4) otherwise, reply to sender with a welcome message
-*/
 #include "CTBot.h"
 CTBot myBot;
 
-String ssid = "Quien es Mi Idolo ?";     // REPLACE mySSID WITH YOUR WIFI SSID
-String pass = "LioMessi"; // REPLACE myPassword YOUR WIFI PASSWORD, IF ANY
-String token = "566903986:AAEs-5oiAimxg5HJXgbV_WuJjSoTXmTzLtM";   // REPLACE myToken WITH YOUR TELEGRAM BOT TOKEN
+String ssid = "";     // REPLACE mySSID WITH YOUR WIFI SSID
+String pass = ""; // REPLACE myPassword YOUR WIFI PASSWORD, IF ANY
+String token = "";   // REPLACE myToken WITH YOUR TELEGRAM BOT TOKEN
 uint8_t led = 2;            // the onboard ESP8266 LED.    
                             // If you have a NodeMCU you can use the BUILTIN_LED pin
                             // (replace 2 with BUILTIN_LED)              
@@ -27,7 +11,7 @@ uint8_t led = 2;            // the onboard ESP8266 LED.
 void setup() {
   // initialize the Serial
   Serial.begin(9600);
-  Serial.println("Starting TelegramBot...");
+  Serial.println("Iniciando TelegramBot...");
 
   // connect the ESP8266 to the desired access point
   myBot.wifiConnect(ssid, pass);
