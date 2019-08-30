@@ -1,9 +1,9 @@
 /*
-char ssid[] = "Quien es Mi Idolo ?";     // el nombre de tu Red
-char password[] = "LioMessi"; // la clave de tu Red
+char ssid[] = "";     // el nombre de tu Red
+char password[] = ""; // la clave de tu Red
 
 // Initialize Telegram BOT
-#define BOTtoken "566903986:AAEs-5oiAimxg5HJXgbV_WuJjSoTXmTzLtM"  // el token de tu BOT, lo obtenemos de BotFather
+#define BOTtoken ""  // el token de tu BOT, lo obtenemos de BotFather
 /*
 Name:        lightBot.ino
 Created:     17/01/2018
@@ -26,7 +26,7 @@ uint8_t led = 2;            // the onboard ESP8266 LED.
 
 void setup() {
   // initialize the Serial
-  Serial.begin(115200);
+  Serial.begin(9600);
   Serial.println("Starting TelegramBot...");
 
   // connect the ESP8266 to the desired access point
