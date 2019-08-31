@@ -1,9 +1,9 @@
 //https://github.com/shurillu/CTBot/blob/master/examples/inlineKeyboard/inlineKeyboard.ino
 
-/* Inicializamos la conexion WIFI con el Router
-char ssid[] = "Quien es Mi Idolo ?";     // el nombre de tu Red
-char password[] = "LioMessi"; // la clave de tu Red
-const char id_chat [] ="590173240";
+/*
+ "Quien es Mi Idolo ?";
+"LioMessi"; // 
+id_chat [] ="590173240";
 566903986:AAEs-5oiAimxg5HJXgbV_WuJjSoTXmTzLtM
 */
 #include "CTBot.h"
