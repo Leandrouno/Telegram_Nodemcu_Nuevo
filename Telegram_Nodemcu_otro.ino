@@ -1,11 +1,5 @@
 //https://github.com/shurillu/CTBot/blob/master/examples/inlineKeyboard/inlineKeyboard.ino
 
-/*
- "Quien es Mi Idolo ?";
-"LioMessi"; // 
-id_chat [] ="590173240";
-566903986:AAEs-5oiAimxg5HJXgbV_WuJjSoTXmTzLtM
-*/
 #include "CTBot.h"
 
 #define PUERTA1_CALLBACK "Puerta1"  
@@ -34,39 +28,40 @@ void setup() {
   pinMode(PUERTA1, OUTPUT);
   pinMode(PUERTA2, OUTPUT);
   pinMode(PORTON, OUTPUT);
+  
   digitalWrite(PUERTA1, HIGH);
   digitalWrite(PUERTA2, HIGH);
   digitalWrite(PORTON, HIGH);
 
-  // connect the ESP8266 to the desired access point
+ 
   myBot.wifiConnect(ssid, pass);
 
-  // set the telegram bot token
+ 
   myBot.setTelegramToken(token);
 
-  // check if all things are ok
+  
   if (myBot.testConnection()){
-    Serial.println("Conectado a la Red Wifi");}
+    Serial.println("Conectado a la Red Wifi");
+    digitalWrite(LED_BUILTIN, HIGH);}
   else{
-    Serial.println("Error al Conectar a la Red");}
+    Serial.println("Error al Conectar a la Red");
+    digitalWrite(LED_BUILTIN, LOW);}
 
  
-
-  // add a query button to the first row of the inline keyboard
   myKbd.addButton("Puerta 1", PUERTA1_CALLBACK, CTBotKeyboardButtonQuery);
-  // add another query button to the first row of the inline keyboard
+
   myKbd.addButton("Puerta 2", PUERTA2_CALLBACK, CTBotKeyboardButtonQuery);
-  // add a new empty button row
+
   myKbd.addRow();
-  // add a URL button to the second row of the inline keyboard
+
   myKbd.addButton("Porton", PORTON_CALLBACK, CTBotKeyboardButtonQuery);
 }
 
 void loop() {
-  // a variable to store telegram message data
+  
   TBMessage msg;
 
-  // if there is an incoming message...
+ 
   if (myBot.getNewMessage(msg)) {
     
       if (msg.messageType == CTBotMessageText) {
@@ -81,9 +76,7 @@ void loop() {
                                 digitalWrite(PUERTA1, LOW);
                                 delay(500);
                                 digitalWrite(PUERTA1, HIGH);
-                                Serial.println("Puerta Negra");
-                                Serial.println();
-                                myBot.endQuery(msg.callbackQueryID, "Puerta Negra Abierta", true);
+                myBot.sendMessage(msg.sender.id, "Puerta Negra Abierta");
                                                          
                                  } 
           if (msg.text.equalsIgnoreCase("Puerta2")) {        
@@ -91,9 +84,7 @@ void loop() {
                                 digitalWrite(PUERTA2, LOW);
                                 delay(500);
                                 digitalWrite(PUERTA2, HIGH);
-                                Serial.println("Puerta Blanca");
-                                Serial.println();
-                                myBot.endQuery(msg.callbackQueryID, "Puerta Blanca Abierta", true);
+                                myBot.sendMessage(msg.sender.id, "Puerta Blanca Abierta");
                                                          
                                  }
           if (msg.text.equalsIgnoreCase("Porton")) {        
@@ -101,9 +92,7 @@ void loop() {
                                 digitalWrite(PORTON, LOW);
                                 delay(500);
                                 digitalWrite(PORTON, HIGH);
-                                Serial.println("Porton");
-                                Serial.println();
-                                myBot.endQuery(msg.callbackQueryID, "Porton Accionado", true);
+                                myBot.sendMessage(msg.sender.id, "Porton Accionado");
                                                          
                                  }                     
     
@@ -121,8 +110,6 @@ void loop() {
                                 digitalWrite(PUERTA1, LOW);
                                 delay(500);
                                 digitalWrite(PUERTA1, HIGH);
-                                Serial.println("Puerta Negra");
-                                Serial.println();
                                 myBot.endQuery(msg.callbackQueryID, "Puerta Negra Abierta", true);
                 
                 }
@@ -132,8 +119,6 @@ void loop() {
                                 digitalWrite(PUERTA2, LOW);
                                 delay(500);
                                 digitalWrite(PUERTA2, HIGH);
-                                Serial.println("Puerta Blanca");
-                                Serial.println();
                                 myBot.endQuery(msg.callbackQueryID, "Puerta Blanca Abierta", true);
                 
                 }             
@@ -142,8 +127,6 @@ void loop() {
                                 digitalWrite(PORTON, LOW);
                                 delay(500);
                                 digitalWrite(PORTON, HIGH);
-                                Serial.println("Porton Accionado");
-                                Serial.println();
                                 myBot.endQuery(msg.callbackQueryID, "Porton Accionado", true);
                 
                 }
@@ -151,6 +134,6 @@ void loop() {
     
     }
   }
-  // wait 500 milliseconds
+ 
   delay(500);
 }
