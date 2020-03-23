@@ -36,7 +36,6 @@ void setup() {
 
  
   myBot.wifiConnect(ssid, pass);
-
  
   myBot.setTelegramToken(token);
 
@@ -68,17 +67,17 @@ void loop() {
 
   
   if (myBot.testConnection()){
-	  
+    
     digitalWrite(LED_BUILTIN, HIGH);
-	
-	} else{
-		
-    Serial.println("Error al Conectar a la Red");	
-    digitalWrite(LED_BUILTIN, LOW);	
-	myBot.wifiConnect(ssid, pass);	
+  
+  } else{
+    
+    Serial.println("Error al Conectar a la Red"); 
+    digitalWrite(LED_BUILTIN, LOW); 
+    myBot.wifiConnect(ssid, pass);  
     myBot.setTelegramToken(token);
-	
-	}
+  
+  }
 
  
   if (myBot.getNewMessage(msg)) {
@@ -119,7 +118,7 @@ void loop() {
                           
                                 myBot.sendMessage(msg.sender.id, "Estado OK !");
                                                          
-                                 } 								 
+                                 }                 
     
         
         
@@ -147,7 +146,7 @@ void loop() {
                                 myBot.endQuery(msg.callbackQueryID, "Puerta Blanca Abierta", true);
                 
                 }    
-				
+        
    if (msg.callbackQueryData.equals(PORTON_CALLBACK)) {
 
                                 digitalWrite(PORTON, LOW);
@@ -156,12 +155,12 @@ void loop() {
                                 myBot.endQuery(msg.callbackQueryID, "Porton Accionado", true);
                 
                 }
-				
+        
    if (msg.callbackQueryData.equals(ESTADO_CALLBACK)) {
 
                                 myBot.endQuery(msg.callbackQueryID, "Estado OK !", true);
                 
-                }				
+                }       
     
     
     }
