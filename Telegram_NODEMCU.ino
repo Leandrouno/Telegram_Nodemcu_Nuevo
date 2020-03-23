@@ -64,21 +64,6 @@ void setup() {
 void loop() {
   
   TBMessage msg;
-
-  
-  if (myBot.testConnection()){
-    
-    digitalWrite(LED_BUILTIN, HIGH);
-  
-  } else{
-    
-    Serial.println("Error al Conectar a la Red"); 
-    digitalWrite(LED_BUILTIN, LOW); 
-    myBot.wifiConnect(ssid, pass);  
-    myBot.setTelegramToken(token);
-  
-  }
-
  
   if (myBot.getNewMessage(msg)) {
     
