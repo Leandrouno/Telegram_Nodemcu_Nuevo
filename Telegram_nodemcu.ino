@@ -17,9 +17,9 @@ bool isKeyboardActive;
 String ssid = "";
 String pass = "";
 String token = "";
+long id = ;
 
-void setup()
-{
+void setup(){
 
   Serial.begin(9600);
   Serial.println("Iniciando TelegramBot...");
@@ -37,8 +37,7 @@ void setup()
 
   myBot.setTelegramToken(token);
 
-  if (myBot.testConnection())
-  {
+  if (myBot.testConnection()){
     Serial.println("Conectado a la Red Wifi");
     digitalWrite(LED, HIGH);
   }
@@ -59,16 +58,15 @@ void setup()
  isKeyboardActive = false;
 }
 
-void loop()
-{
+void loop(){
 
   TBMessage msg;
 
-  if (myBot.getNewMessage(msg))
-  {
+  if (myBot.getNewMessage(msg)){
 
-    if (msg.messageType == CTBotMessageText)
-    {
+    if(msg.sender.id == id){
+
+    if (msg.messageType == CTBotMessageText){
 
       if (msg.text.equalsIgnoreCase("Teclado"))
       {
@@ -103,15 +101,12 @@ void loop()
       if (msg.text.equalsIgnoreCase("Estado"))
       {
 
-        myBot.sendMessage(msg.sender.id, "Estado OK !");
+        myBot.sendMessage(msg.sender.id, "Very Good MONOO !");
       }
-    }
 
-    else if (msg.messageType == CTBotMessageQuery)
-    {
+    } else if (msg.messageType == CTBotMessageQuery){
 
-      if (msg.callbackQueryData.equals(PUERTA1_CALLBACK))
-      {
+      if (msg.callbackQueryData.equals(PUERTA1_CALLBACK)){
 
         digitalWrite(PUERTA1, LOW);
         delay(500);
@@ -119,8 +114,7 @@ void loop()
         myBot.endQuery(msg.callbackQueryID, "Puerta Negra Abierta", true);
       }
 
-      if (msg.callbackQueryData.equals(PUERTA2_CALLBACK))
-      {
+      if (msg.callbackQueryData.equals(PUERTA2_CALLBACK)){
 
         digitalWrite(PUERTA2, LOW);
         delay(500);
@@ -128,8 +122,7 @@ void loop()
         myBot.endQuery(msg.callbackQueryID, "Puerta Blanca Abierta", true);
       }
 
-      if (msg.callbackQueryData.equals(PORTON_CALLBACK))
-      {
+      if (msg.callbackQueryData.equals(PORTON_CALLBACK)){
 
         digitalWrite(PORTON, LOW);
         delay(500);
@@ -137,12 +130,14 @@ void loop()
         myBot.endQuery(msg.callbackQueryID, "Porton Accionado", true);
       }
 
-      if (msg.callbackQueryData.equals(ESTADO_CALLBACK))
-      {
+      if (msg.callbackQueryData.equals(ESTADO_CALLBACK)){
 
-        myBot.endQuery(msg.callbackQueryID, "Estado OK !", true);
+        myBot.endQuery(msg.callbackQueryID, "Very Good MONOO !", true);
       }
     }
+
+  } else{myBot.sendMessage(msg.sender.id, "JUIRAAAA !!");}
+
   }
 
   delay(500);
