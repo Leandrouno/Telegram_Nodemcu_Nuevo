@@ -17,7 +17,7 @@ bool isKeyboardActive;
 String ssid = "";
 String pass = "";
 String token = "";
-long id = ;
+long id = ;// id sin comillas
 
 void setup(){
 
@@ -51,11 +51,12 @@ void setup(){
  myKbd.addButton("Puerta2");
     myKbd.addRow();
  myKbd.addButton("Porton");
- myKbd.addRow();
-  myKbd.addButton("Estado");
-  myKbd.addButton("EstadoPorton");
-    myKbd.enableResize();
- isKeyboardActive = false;
+    myKbd.addRow();
+ myKbd.addButton("Estado");
+ myKbd.addButton("EstadoPorton");
+ myKbd.addButton("EstadoTimbre");
+ myKbd.enableResize();
+ isKeyboardActive = true;
 }
 
 void loop(){
@@ -68,46 +69,39 @@ void loop(){
 
     if (msg.messageType == CTBotMessageText){
 
-      if (msg.text.equalsIgnoreCase("Teclado"))
-      {
+      if (msg.text.equalsIgnoreCase("Teclado")){
         myBot.sendMessage(msg.sender.id, "Teclado", myKbd);
         isKeyboardActive = true;
       }
-      if (msg.text.equalsIgnoreCase("Puerta1"))
-      {
 
+      if (msg.text.equalsIgnoreCase("Puerta1")){
         digitalWrite(PUERTA1, LOW);
         delay(500);
         digitalWrite(PUERTA1, HIGH);
         myBot.sendMessage(msg.sender.id, "Puerta Negra Abierta");
       }
-      if (msg.text.equalsIgnoreCase("Puerta2"))
-      {
-
+      
+      if (msg.text.equalsIgnoreCase("Puerta2")){
         digitalWrite(PUERTA2, LOW);
         delay(500);
         digitalWrite(PUERTA2, HIGH);
         myBot.sendMessage(msg.sender.id, "Puerta Blanca Abierta");
       }
-      if (msg.text.equalsIgnoreCase("Porton"))
-      {
 
+      if (msg.text.equalsIgnoreCase("Porton")){
         digitalWrite(PORTON, LOW);
         delay(500);
         digitalWrite(PORTON, HIGH);
         myBot.sendMessage(msg.sender.id, "Porton Accionado");
       }
 
-      if (msg.text.equalsIgnoreCase("Estado"))
-      {
-
+      if (msg.text.equalsIgnoreCase("Estado")){
         myBot.sendMessage(msg.sender.id, "Very Good MONOO !");
       }
 
     } else if (msg.messageType == CTBotMessageQuery){
 
       if (msg.callbackQueryData.equals(PUERTA1_CALLBACK)){
-
         digitalWrite(PUERTA1, LOW);
         delay(500);
         digitalWrite(PUERTA1, HIGH);
@@ -115,7 +109,6 @@ void loop(){
       }
 
       if (msg.callbackQueryData.equals(PUERTA2_CALLBACK)){
-
         digitalWrite(PUERTA2, LOW);
         delay(500);
         digitalWrite(PUERTA2, HIGH);
@@ -123,7 +116,6 @@ void loop(){
       }
 
       if (msg.callbackQueryData.equals(PORTON_CALLBACK)){
-
         digitalWrite(PORTON, LOW);
         delay(500);
         digitalWrite(PORTON, HIGH);
@@ -131,9 +123,9 @@ void loop(){
       }
 
       if (msg.callbackQueryData.equals(ESTADO_CALLBACK)){
-
         myBot.endQuery(msg.callbackQueryID, "Very Good MONOO !", true);
       }
+      
     }
 
   } else{myBot.sendMessage(msg.sender.id, "JUIRAAAA !!");}
